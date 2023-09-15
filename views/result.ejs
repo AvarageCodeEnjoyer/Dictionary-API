@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Result</title>
+</head>
+<body>
+    <h1>Dictionary Result</h1>
+    <p>Word: <span id="word"><%= result.word %></span></p>
+    <p>API Call: <span id="apiUrl"><%= result.apiUrl %></span></p>
+    <ul id="definitions">
+        <% definitions.forEach(def => { %>
+            <li><%= def %></li>
+        <% }) %>
+    </ul>
+    <a href="/">Back to Home</a>
+    <script>
+        // JavaScript code to populate the result
+        const result = JSON.stringify(result)
+        if (result) {
+            document.getElementById('word').textContent = result.word;
+            document.getElementById('apiUrl').textContent = result.apiUrl;
+            const definitions = result.definitions;
+            const definitionsList = document.getElementById('definitions');
+            definitions.forEach(def => {
+                const li = document.createElement('li');
+                li.textContent = def;
+                definitionsList.appendChild(li);
+            });
+        } else {
+            document.getElementById('definitions').innerHTML = '<p>No result found.</p>';
+        }
+    </script>
+</body>
+</html>
